@@ -264,6 +264,15 @@ header{
     align-items: center;
     justify-content: space-around;
 }
+#console .dungeon .RPS div{
+    display: flex;
+    flex-direction: column;
+    font-size: 4vw;
+    align-items: center;
+    justify-content: space-between;
+    width: 20vw;
+    height: 20vw;
+}
 #console .dungeon .RPS .box{
     box-sizing: border-box;
     width: 20vw;
