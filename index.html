@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hunter</title>
+    </head>
+    <link rel="stylesheet" href="style.css">
+
+    <body>
+        <header>
+            <h1>HUNTER</h1>
+        </header>
+
+        <div id="body">
+            
+            <div class="wrap">
+                <div class="game">
+                    <div class="btnWraperL">
+                        <button class="btn"><img src="images/icon/navigation.png" alt="" class="nav"></button>
+                        <button class="btn"><img src="images/icon/armour.png" alt="" class="equipment"></button>
+                    </div>
+                    <div class="enemy">
+                        <div class="enemyHP">
+                            <div class="bar"></div>
+                        </div>
+                        <img class="monster" src="" alt="monster">
+                    </div>
+                    <img src="images/background/house.jpg" alt="" class="display">
+                    <div class="btnWraper">    
+                        <button class="btn"><img src="images/icon/navigation.png" alt="" class="nav"></button>
+                        <button class="btn"><img src="images/icon/armour.png" alt="" class="equipment"></button>
+                        <button class="btn"><img src="images/icon/console.png" alt="" class="console"></button>
+                        <button class="btn"><img src="images/icon/shop.png" alt="" class="shop"></button>
+                        <button class="btn"><img src="images/icon/inventory.png" alt="" class="inventory"></button>
+                    </div>
+                    <div class="btnWraperR">
+                        <button class="btn"><img src="images/icon/shop.png" alt="" class="shop"></button>
+                        <button class="btn"><img src="images/icon/inventory.png" alt="" class="inventory"></button>
+                    </div>
+                </div>
+
+                <div id="console">
+                    <div class="home">
+                        <button class="toDungeon">Go to Dungeon</button>
+                    </div>
+                    <div class="dungeon">
+                        <p>you entered the dungeon</p>
+                        <button class="explore">Explore more</button>
+                        <button class="escape">Escape</button>
+                        <button class="attack">Attack</button>
+                        <button class="run">Run</button>
+                        <div class="healthBar">
+                            <p>Your HP:</p>
+                            <div class="playerHP">
+                                <div class="bar"></div>
+                            </div>
+                            <p>100%</p>
+                        </div>
+                        <div class="RPS">
+                            <div>
+                                <img class="box attacking" src="images/icon/scissor.png" alt="scissor">
+                                <h4>Attack</h1>
+                            </div>
+                            <div>
+                                <img class="box defending" src="images/icon/rock.png" alt="rock">
+                                <h4>Defense</h4>
+                            </div>
+                            <div>
+                                <img class="box spelling" src="images/icon/paper.png" alt="paper">
+                                <h4>Magic</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="left">
+                <nav>
+                    <div class="about">
+                        <h3>About</h3>
+                        <p>Hunter. A simple, easy, and short RPG game. There's none objective in this game. All you need to do is hunt the dungeon and buy more good equipment. There is a boss in the dungeon you can make that your objective if you want.
+                            The dungeon is multi dimensional dungeon that can change its room automaticaly so you need some potion, die or deffeating the boss to escape from the dungeon. This game probably can't save your progress so make sure to don't close this tab or reload it until you finish this game.
+                        </p>
+                    </div>
+                    <div class="credit">
+                        <h3>Credit</h3>
+                        <h4>Programer</h4>
+                        <ul>
+                            <li>Machives</li>
+                        </ul>
+                        <h4>Icon</h4>
+                        <ul>
+                            <li><a href="https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack">shikashi's fantasy icon pack by cheekyinkling</a></li>
+                        </ul>
+                        <h4>Monster</h4>
+                        <ul>
+                            <li><a href="https://luizmelo.itch.io/monsters-creatures-fantasy">monsters creatures fantasy by luizmelo</a></li>
+                        </ul>
+                        <h4>Background</h4>
+                        <ul>
+                            <li><a href="https://www.freepik.com/vectors/forest-house">Forest house vector by upklyak - www.freepik.com</a></li>
+                            <li><a href='https://www.freepik.com/vectors/dungeon'>Dungeon vector by upklyak - www.freepik.com</a></li>
+                        </ul>
+                    </div>
+                </nav>
+        
+                <div class="equipment">
+                    <img src="images/icon/primarySword.png" class="item weapon">
+                    <img src="images/icon/none.png" class="item head">
+                    <img src="images/icon/none.png" class="item body">
+                    <img src="images/icon/none.png" class="item gloves">
+                    <img src="images/icon/none.png" class="item boots">
+                </div>
+            </div>
+
+            <div id="right">
+                <div class="shop ">
+                    <div class="block ironHelmet">
+                        <img src="images/icon/ironHelmet.png" alt="">
+                        <div class="desc">
+                            <h3>Iron Helmet</h3>
+                            <p>Iron helmet to protecting your head. Increasing your defense by 10 points.</p>
+                        </div>
+                        <span>500G</span>
+                    </div>
+                    <div class="block ironChestplate">
+                        <img src="images/icon/ironChestplate.png" alt="">
+                        <div class="desc">
+                            <h3>Iron Chestplate</h3>
+                            <p>Iron Chestplate to protecting your body. Increasing your defense by 50 points.</p>
+                        </div>
+                        <span>1000G</span>
+                    </div>
+                    <div class="block ironGloves">
+                        <img src="images/icon/ironGlove.png" alt="">
+                        <div class="desc">
+                            <h3>Iron Gloves</h3>
+                            <p>Iron gloves to protect your hand. Increasing your defense by 10 points</p>
+                        </div>
+                        <span>300G</span>
+                    </div>
+                    <div class="block ironBoots">
+                        <img src="images/icon/ironBoots.png" alt="">
+                        <div class="desc">
+                            <h3>Iron Boots</h3>
+                            <p>Iron boots to protect your feet. Increasing your defense by 10 points</p>
+                        </div>
+                        <span>200G</span>
+                    </div>
+                    <div class="block ironSword">
+                        <img src="images/icon/ironSword.png" alt="">
+                        <div class="desc">
+                            <h3>Iron Sword</h3>
+                            <p>Iron sword helps you defeat enemies more easily. Increasing your attack by 100 points</p>
+                        </div>
+                        <span>1000G</span>
+                    </div>
+                    <div class="block healtPotion">
+                        <img src="images/icon/healPotion.png" alt="">
+                        <div class="desc">
+                            <h3>Healing Potion</h3>
+                            <p>This potion can heals your HP by 100 points</p>
+                        </div>
+                        <span>50G</span>
+                    </div>
+                    <div class="block escapePotion">
+                        <img src="images/icon/escapePotion.png" alt="">
+                        <div class="desc">
+                            <h3>Escape Potion</h3>
+                            <p>This Potion can teleport you back in your house</p>
+                        </div>
+                        <span>50G</span>
+                    </div>
+                </div>
+                <div class="inventory">
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="script.js"></script>
+</html>
