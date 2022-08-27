@@ -106,32 +106,49 @@ const player = {
 
 const enemy = [
     {
+        //percentage system is actualy choosing a random number between 1-10 
         'name':'bat eye',
         'image':'eye.png',
         'atk': 50,
         'def': 5,
-        'HP' : 300
+        'HP' : 300,
+        //percentage
+        'attacking': 2, //this mean attacking will choose if the rand number is between 1 to 3
+        'deffending': 4,
+        'spelling':9
     },
     {
         'name':'goblin',
         'image':'goblin.png',
         'atk': 70,
         'def': 10,
-        'HP' : 500
+        'HP' : 500,
+        //percentage
+        'attacking': 5,
+        'deffending': 8,
+        'spelling': 9
     },
     {
         'name':'mushroom',
         'image':'mushroom.png',
         'atk': 50,
         'def': 5,
-        'HP' : 300
+        'HP' : 300,
+        //percentage
+        'attacking': 3,
+        'deffending': 6,
+        'spelling': 9
     },
     {
         'name':'skeleton',
         'image':'skeleton.png',
         'atk': 70,
         'def': 10,
-        'HP' : 200
+        'HP' : 200,
+        //percentage
+        'attacking': 3,
+        'deffending': 7,
+        'spelling': 9
     }
 ]
 //----------------------------------------decreasing element---------------------------------------
@@ -513,6 +530,8 @@ equipment.forEach(function(elm) {
 
 // ------------------------------- dungeon system -------------------------------
 
+
+//to dungeon
 toDungeonbtn.addEventListener('click', function(){
     game.querySelector('.display').setAttribute('src', 'images/background/dungeon.jpg');
     escapeBtn.parentElement.style.display = 'block'
@@ -524,6 +543,8 @@ toDungeonbtn.addEventListener('click', function(){
         right.querySelector('.shop').style.display = 'none';
     });
 });
+
+//escape option
 escapeBtn.addEventListener('click', function() {
     game.querySelector('.display').setAttribute('src', 'images/background/house.jpg');
     toDungeonbtn.parentElement.style.display = 'flex';
@@ -534,8 +555,12 @@ escapeBtn.addEventListener('click', function() {
         shp.parentElement.style.display = 'block';
     });
 });
+
+
+//explore
+var enemyCode;
 exploreBtn.addEventListener('click', function(){
-    var rand = Math.floor(Math.random()*5);
+    enemyCode = Math.floor(Math.random()*5);
     if ( 0 <= rand && rand < 4)
     {
         game.querySelector('.enemy').style.display = 'flex';
@@ -552,6 +577,8 @@ exploreBtn.addEventListener('click', function(){
     }
 });
 
+
+//run option
 var canEscape = Math.floor(Math.random()*5);
 runBtn.addEventListener('click', function(){
     console.log(canEscape);
@@ -565,16 +592,53 @@ runBtn.addEventListener('click', function(){
         runBtn.style.display = 'none';
         canEscape = Math.floor(Math.random()*5);
     }
-    else
+    elseàq
     {
         cnsl.querySelector('.dungeon').getElementsByTagName('p')[0].innerHTML = 'the enemy wont let you escape';
     }
 });
 
+//atk option
 atkBtn.addEventListener('click',function(){
     cnsl.querySelector('.dungeon').getElementsByTagName('p')[0].style.display = 'none';
     atkBtn.style.display = 'none';
     runBtn.style.display = 'none';
     cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'flex';
     cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'flex';
+
+//battle mechanic
+
+
+function enemyMoveMechanics(){
+    var rand = Math.floor(Math.random()*10);
+    if (rand <= enemy[enemyCode].attacking && rand >= 0)
+    {
+        return "attacking";
+    }
+    else if (rand <= enemy[enemyCode].deffending && rand > enemy[enemyCode].attacking)
+    {
+        return "deffending";
+    }
+    else if (rand <= enemy[enemyCode].spelling && rand > enemy[enemyCode].deffending)
+    {
+        return "spelling";
+    }
+}
+
+function judging(enemy,player){
+    
+    console.log("ok");
+}
+
+cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.attacking').addEventListener('click',function(){
+    judging(enemyMoveMechanics(),"attacking");
 });
+cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.deffending').addEventListener('click',function(){
+    judging(enemyMoveMechanics(),"deffending");
+});
+cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.spelling').addEventListener('click',function(){
+    judging(enemyMoveMechanics(),"spelling");
+});
+
+
+
