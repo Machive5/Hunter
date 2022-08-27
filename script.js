@@ -561,11 +561,11 @@ escapeBtn.addEventListener('click', function() {
 var enemyCode;
 exploreBtn.addEventListener('click', function(){
     enemyCode = Math.floor(Math.random()*5);
-    if ( 0 <= rand && rand < 4)
+    if ( 0 <= enemyCode && enemyCode < 4)
     {
         game.querySelector('.enemy').style.display = 'flex';
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[0].innerHTML = 'the ' + enemy[rand].name + ' is aproaching';
-        game.querySelector('.enemy').querySelector('.monster').setAttribute('src', 'images/monster/' + enemy[rand].image);
+        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'the ' + enemy[enemyCode].name + ' is aproaching';
+        game.querySelector('.enemy').querySelector('.monster').setAttribute('src', 'images/monster/' + enemy[enemyCode].image);
         escapeBtn.style.display = 'none';
         exploreBtn.style.display = 'none';
         atkBtn.style.display = 'block';
@@ -573,7 +573,7 @@ exploreBtn.addEventListener('click', function(){
     }
     else{
         game.querySelector('.enemy').style.display = 'none';
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[0].innerHTML = 'you found nothing';
+        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'you found nothing';
     }
 });
 
@@ -585,56 +585,82 @@ runBtn.addEventListener('click', function(){
     if (canEscape < 2)
     {
         game.querySelector('.enemy').style.display = 'none';
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[0].innerHTML = 'you run away from the battle';
+        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'you run away from the battle';
         escapeBtn.style.display = 'block';
         exploreBtn.style.display = 'block';
         atkBtn.style.display = 'none';
         runBtn.style.display = 'none';
         canEscape = Math.floor(Math.random()*5);
     }
-    elseàq
+    else
     {
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[0].innerHTML = 'the enemy wont let you escape';
+        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'the enemy wont let you escape';
     }
 });
 
 //atk option
 atkBtn.addEventListener('click',function(){
-    cnsl.querySelector('.dungeon').getElementsByTagName('p')[0].style.display = 'none';
+    cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'Battle begin';
     atkBtn.style.display = 'none';
     runBtn.style.display = 'none';
     cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'flex';
     cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'flex';
-
+});
 //battle mechanic
 
 
 function enemyMoveMechanics(){
-    var rand = Math.floor(Math.random()*10);
-    if (rand <= enemy[enemyCode].attacking && rand >= 0)
+    var rand = Math.floor(Math.random()*9);
+    if (rand <= enemy[enemyCode].attacking)
     {
         return "attacking";
     }
-    else if (rand <= enemy[enemyCode].deffending && rand > enemy[enemyCode].attacking)
+    if (rand <= enemy[enemyCode].deffending && rand > enemy[enemyCode].attacking)
     {
-        return "deffending";
+        return "defending";
     }
-    else if (rand <= enemy[enemyCode].spelling && rand > enemy[enemyCode].deffending)
+    if (rand > enemy[enemyCode].deffending)
     {
         return "spelling";
     }
 }
 
 function judging(enemy,player){
-    
-    console.log("ok");
+    if (enemy == player)
+    {
+        console.log("draw");
+    }
+    else if (enemy == "attacking" && player == "defending")
+    {
+        console.log("player win");
+    }
+    else if (enemy == "defending" && player == "spelling")
+    {
+        console.log("player win");
+    }
+    else if (enemy == "spelling" && player == "attacking")
+    {
+        console.log("player win");
+    }
+    else if (player == "attacking" && enemy == "defending")
+    {
+        console.log("enemy win");
+    }
+    else if (player == "defending" && enemy == "spelling")
+    {
+        console.log("enemy win");
+    }
+    else if (player == "spelling" && enemy == "attacking")
+    {
+        console.log("enemy win");
+    }
 }
 
 cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.attacking').addEventListener('click',function(){
     judging(enemyMoveMechanics(),"attacking");
 });
-cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.deffending').addEventListener('click',function(){
-    judging(enemyMoveMechanics(),"deffending");
+cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.defending').addEventListener('click',function(){
+    judging(enemyMoveMechanics(),"defending");
 });
 cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.spelling').addEventListener('click',function(){
     judging(enemyMoveMechanics(),"spelling");

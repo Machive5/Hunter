@@ -249,6 +249,12 @@ header{
     background-color: red;
     border-radius: 5vw;
 }
+#console .dungeon .healthBar .playerHP .bar{
+    background-color: lime;
+    width: 90%;
+    height: 100%;
+    border-radius: 1vw;
+}
 #console .dungeon .healthBar p{
     display: block;
     max-width: 20%;
