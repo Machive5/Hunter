@@ -113,9 +113,9 @@ const enemy = [
         'def': 5,
         'HP' : 300,
         //percentage
-        'attacking': 3, //this mean attacking will choose if the rand number is between 1 to 3
-        'deffending': 5,
-        'spelling':10
+        'attacking': 2, //this mean attacking will choose if the rand number is between 1 to 3
+        'deffending': 4,
+        'spelling':9
     },
     {
         'name':'goblin',
@@ -124,9 +124,9 @@ const enemy = [
         'def': 10,
         'HP' : 500,
         //percentage
-        'attacking': 6,
-        'deffending': 9,
-        'spelling': 10
+        'attacking': 5,
+        'deffending': 8,
+        'spelling': 9
     },
     {
         'name':'mushroom',
@@ -135,9 +135,9 @@ const enemy = [
         'def': 5,
         'HP' : 300,
         //percentage
-        'attacking': 4,
-        'deffending': 7,
-        'spelling': 10
+        'attacking': 3,
+        'deffending': 6,
+        'spelling': 9
     },
     {
         'name':'skeleton',
@@ -146,7 +146,9 @@ const enemy = [
         'def': 10,
         'HP' : 200,
         //percentage
-        
+        'attacking': 3,
+        'deffending': 7,
+        'spelling': 9
     }
 ]
 //----------------------------------------decreasing element---------------------------------------
@@ -604,13 +606,39 @@ atkBtn.addEventListener('click',function(){
     cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'flex';
     cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'flex';
 
-//atk mechanic
+//battle mechanic
 
-function atkMechanics(){
+
+function enemyMoveMechanics(){
     var rand = Math.floor(Math.random()*10);
-    if (rand < enemy[enemyCode].attacking)
-    
+    if (rand <= enemy[enemyCode].attacking && rand >= 0)
+    {
+        return "attacking";
+    }
+    else if (rand <= enemy[enemyCode].deffending && rand > enemy[enemyCode].attacking)
+    {
+        return "deffending";
+    }
+    else if (rand <= enemy[enemyCode].spelling && rand > enemy[enemyCode].deffending)
+    {
+        return "spelling";
+    }
 }
+
+function judging(enemy,player){
+    
+    console.log("ok");
+}
+
+cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.attacking').addEventListener('click',function(){
+    judging(enemyMoveMechanics(),"attacking");
+});
+cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.deffending').addEventListener('click',function(){
+    judging(enemyMoveMechanics(),"deffending");
+});
+cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.spelling').addEventListener('click',function(){
+    judging(enemyMoveMechanics(),"spelling");
+});
 
 
 
