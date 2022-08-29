@@ -558,7 +558,7 @@ escapeBtn.addEventListener('click', function() {
 
 
 //explore
-var enemyCode;
+let enemyCode;
 exploreBtn.addEventListener('click', function(){
     enemyCode = Math.floor(Math.random()*5);
     if ( 0 <= enemyCode && enemyCode < 4)
@@ -579,7 +579,7 @@ exploreBtn.addEventListener('click', function(){
 
 
 //run option
-var canEscape = Math.floor(Math.random()*5);
+let canEscape = Math.floor(Math.random()*5);
 runBtn.addEventListener('click', function(){
     console.log(canEscape);
     if (canEscape < 2)
@@ -607,10 +607,13 @@ atkBtn.addEventListener('click',function(){
     cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'flex';
 });
 //battle mechanic
-
+const pbar = cnsl.querySelector('.dungeon').querySelector('.healthBar').querySelector('.playerHP').querySelector('.bar');
+const ebar = game.querySelector('.enemy').querySelector('.enemyHP').querySelector('.bar');
+let pHp = player.HP;
+let eHp = enemy[enemyCode].HP;
 
 function enemyMoveMechanics(){
-    var rand = Math.floor(Math.random()*9);
+    let rand = Math.floor(Math.random()*9);
     if (rand <= enemy[enemyCode].attacking)
     {
         return "attacking";

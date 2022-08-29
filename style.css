@@ -251,7 +251,7 @@ header{
 }
 #console .dungeon .healthBar .playerHP .bar{
     background-color: lime;
-    width: 90%;
+    width: 100%;
     height: 100%;
     border-radius: 1vw;
 }
@@ -285,6 +285,9 @@ header{
     height: 20vw;
     border: 0.8vw solid white;
     border-radius: 25%;
+}
+#console .dungeon .RPS .box:active{
+    background-color: white;
 }
 #console p{
     box-sizing: border-box;
