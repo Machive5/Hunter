@@ -598,8 +598,13 @@ runBtn.addEventListener('click', function(){
     }
 });
 
+const pbar = cnsl.querySelector('.dungeon').querySelector('.healthBar').querySelector('.playerHP').querySelector('.bar');
+const ebar = game.querySelector('.enemy').querySelector('.enemyHP').querySelector('.bar');
+let pHp = player.HP;
+let eHp
 //atk option
 atkBtn.addEventListener('click',function(){
+    eHp = enemy[enemyCode].HP;
     cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'Battle begin';
     atkBtn.style.display = 'none';
     runBtn.style.display = 'none';
@@ -607,11 +612,6 @@ atkBtn.addEventListener('click',function(){
     cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'flex';
 });
 //battle mechanic
-const pbar = cnsl.querySelector('.dungeon').querySelector('.healthBar').querySelector('.playerHP').querySelector('.bar');
-const ebar = game.querySelector('.enemy').querySelector('.enemyHP').querySelector('.bar');
-let pHp = player.HP;
-let eHp = enemy[enemyCode].HP;
-
 function enemyMoveMechanics(){
     let rand = Math.floor(Math.random()*9);
     if (rand <= enemy[enemyCode].attacking)
@@ -628,35 +628,50 @@ function enemyMoveMechanics(){
     }
 }
 
-function judging(enemy,player){
-    if (enemy == player)
+function judging(enmy,plyr){
+    let result;
+    if (enmy == plyr)
     {
-        console.log("draw");
+        result = "draw";
     }
-    else if (enemy == "attacking" && player == "defending")
+    else if (enmy == "attacking" && plyr == "defending")
     {
-        console.log("player win");
+        result = "player win";
+        eHp = eHp - player.atk + enemy[enemyCode].def;
     }
-    else if (enemy == "defending" && player == "spelling")
+    else if (enmy == "defending" && plyr == "spelling")
     {
-        console.log("player win");
+        result ="player win";
+        eHp = eHp - player.atk + enemy[enemyCode].def;
     }
-    else if (enemy == "spelling" && player == "attacking")
+    else if (enmy == "spelling" && plyr == "attacking")
     {
-        console.log("player win");
+        result ="player win";
+        eHp = eHp - player.atk + enemy[enemyCode].def;
     }
-    else if (player == "attacking" && enemy == "defending")
+    else if (plyr == "attacking" && enmy == "defending")
     {
-        console.log("enemy win");
+        result ="enemy win";
+        pHp = pHp - enemy[enemyCode].atk + player.def;
     }
-    else if (player == "defending" && enemy == "spelling")
+    else if (plyr == "defending" && enmy == "spelling")
     {
-        console.log("enemy win");
+        result ="enemy win";
+        pHp = pHp - enemy[enemyCode].atk + player.def;
     }
-    else if (player == "spelling" && enemy == "attacking")
+    else if (plyr == "spelling" && enmy == "attacking")
     {
-        console.log("enemy win");
+        result ="enemy win";
+        pHp = pHp - enemy[enemyCode].atk + player.def;
     }
+    let p = pHp/player.HP*100;
+    let e = eHp/enemy[enemyCode].HP*100;
+    cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'Enemy ' + enmy + " and player " + plyr + ". " + result;
+    pbar.style.width = p.toString() + '%';
+    ebar.style.width = e.toString() + '%';
+    setTimeout(function(){}, 500);
+    console.log(p);
+    console.log(e);
 }
 
 cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.attacking').addEventListener('click',function(){
