@@ -112,6 +112,7 @@ const enemy = [
         'atk': 50,
         'def': 5,
         'HP' : 300,
+        'gold': 5,
         //percentage
         'attacking': 2, //this mean attacking will choose if the rand number is between 1 to 3
         'deffending': 4,
@@ -123,6 +124,7 @@ const enemy = [
         'atk': 70,
         'def': 10,
         'HP' : 500,
+        'gold': 3,
         //percentage
         'attacking': 5,
         'deffending': 8,
@@ -134,6 +136,7 @@ const enemy = [
         'atk': 50,
         'def': 5,
         'HP' : 300,
+        'gold': 6,
         //percentage
         'attacking': 3,
         'deffending': 6,
@@ -145,6 +148,7 @@ const enemy = [
         'atk': 70,
         'def': 10,
         'HP' : 200,
+        'gold': 5,
         //percentage
         'attacking': 3,
         'deffending': 7,
@@ -533,6 +537,9 @@ equipment.forEach(function(elm) {
 
 //to dungeon
 toDungeonbtn.addEventListener('click', function(){
+    pHp = player.HP;
+    pbar.style.width = '100%';
+    cnsl.getElementsByTagName('p')[0].innerHTML = "you entering the dungeon";
     game.querySelector('.display').setAttribute('src', 'images/background/dungeon.jpg');
     escapeBtn.parentElement.style.display = 'block'
     toDungeonbtn.parentElement.style.display = 'none';
@@ -542,6 +549,12 @@ toDungeonbtn.addEventListener('click', function(){
         shp.parentElement.style.backgroundColor = 'black';
         right.querySelector('.shop').style.display = 'none';
     });
+    escapeBtn.style.display = 'block';
+    exploreBtn.style.display = 'block';
+    atkBtn.style.display = 'none';
+    runBtn.style.display = 'none';
+    cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'none';
+    cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'none';
 });
 
 //escape option
@@ -551,7 +564,7 @@ function escape() {
     escapeBtn.parentElement.style.display = 'none';
     game.querySelector('.enemy').style.display = 'none';
     document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
-        shp.style.display = 'block';
+        shp.style.display = 'flex';
         shp.parentElement.style.display = 'block';
     });
 }
@@ -680,6 +693,7 @@ function result(plyr,enmy,result){
     if (p==0){
         cnsl.getElementsByTagName('p')[0].innerHTML = 'You fainted and you run to your hause because you hurt badly';
         escape();
+        pHp = player.HP;
         pbar.style.width = '100%';
     }
     if (e==0){
