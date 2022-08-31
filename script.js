@@ -403,7 +403,7 @@ menu.addEventListener('click',function(a){
         header.getElementsByTagName('h1')[0].innerHTML = "CONSOLE";
         a.target.parentElement.style.backgroundColor = "white";
         right.style.display = 'none';
-        cnsl.style.display = 'block';
+        cnsl.style.display = 'flex';
         left.style.display = 'none';
     }
     else if(a.target.classList[0] === 'shop'){
@@ -545,7 +545,7 @@ toDungeonbtn.addEventListener('click', function(){
 });
 
 //escape option
-escapeBtn.addEventListener('click', function() {
+function escape() {
     game.querySelector('.display').setAttribute('src', 'images/background/house.jpg');
     toDungeonbtn.parentElement.style.display = 'flex';
     escapeBtn.parentElement.style.display = 'none';
@@ -554,7 +554,8 @@ escapeBtn.addEventListener('click', function() {
         shp.style.display = 'block';
         shp.parentElement.style.display = 'block';
     });
-});
+}
+escapeBtn.addEventListener('click', escape);
 
 
 //explore
@@ -564,7 +565,7 @@ exploreBtn.addEventListener('click', function(){
     if ( 0 <= enemyCode && enemyCode < 4)
     {
         game.querySelector('.enemy').style.display = 'flex';
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'the ' + enemy[enemyCode].name + ' is aproaching';
+        cnsl.getElementsByTagName('p')[0].innerHTML = 'the ' + enemy[enemyCode].name + ' is aproaching';
         game.querySelector('.enemy').querySelector('.monster').setAttribute('src', 'images/monster/' + enemy[enemyCode].image);
         escapeBtn.style.display = 'none';
         exploreBtn.style.display = 'none';
@@ -573,7 +574,7 @@ exploreBtn.addEventListener('click', function(){
     }
     else{
         game.querySelector('.enemy').style.display = 'none';
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'you found nothing';
+        cnsl.getElementsByTagName('p')[0].innerHTML = 'you found nothing';
     }
 });
 
@@ -581,11 +582,10 @@ exploreBtn.addEventListener('click', function(){
 //run option
 let canEscape = Math.floor(Math.random()*5);
 runBtn.addEventListener('click', function(){
-    console.log(canEscape);
     if (canEscape < 2)
     {
         game.querySelector('.enemy').style.display = 'none';
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'you run away from the battle';
+        cnsl.getElementsByTagName('p')[0].innerHTML = 'you run away from the battle';
         escapeBtn.style.display = 'block';
         exploreBtn.style.display = 'block';
         atkBtn.style.display = 'none';
@@ -594,7 +594,7 @@ runBtn.addEventListener('click', function(){
     }
     else
     {
-        cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'the enemy wont let you escape';
+        cnsl.getElementsByTagName('p')[0].innerHTML = 'the enemy wont let you escape';
     }
 });
 
@@ -605,7 +605,7 @@ let eHp
 //atk option
 atkBtn.addEventListener('click',function(){
     eHp = enemy[enemyCode].HP;
-    cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'Battle begin';
+    cnsl.getElementsByTagName('p')[0].innerHTML = 'Battle begin';
     atkBtn.style.display = 'none';
     runBtn.style.display = 'none';
     cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'flex';
@@ -629,49 +629,68 @@ function enemyMoveMechanics(){
 }
 
 function judging(enmy,plyr){
-    let result;
+    let rslt;
     if (enmy == plyr)
     {
-        result = "draw";
+        rslt = "draw";
     }
     else if (enmy == "attacking" && plyr == "defending")
     {
-        result = "player win";
+        rslt = "player win";
         eHp = eHp - player.atk + enemy[enemyCode].def;
     }
     else if (enmy == "defending" && plyr == "spelling")
     {
-        result ="player win";
+        rslt ="player win";
         eHp = eHp - player.atk + enemy[enemyCode].def;
     }
     else if (enmy == "spelling" && plyr == "attacking")
     {
-        result ="player win";
+        rslt ="player win";
         eHp = eHp - player.atk + enemy[enemyCode].def;
     }
     else if (plyr == "attacking" && enmy == "defending")
     {
-        result ="enemy win";
+        rslt ="enemy win";
         pHp = pHp - enemy[enemyCode].atk + player.def;
     }
     else if (plyr == "defending" && enmy == "spelling")
     {
-        result ="enemy win";
+        rslt ="enemy win";
         pHp = pHp - enemy[enemyCode].atk + player.def;
     }
     else if (plyr == "spelling" && enmy == "attacking")
     {
-        result ="enemy win";
+        rslt ="enemy win";
         pHp = pHp - enemy[enemyCode].atk + player.def;
     }
+    result(plyr,enmy,rslt)
+}
+function result(plyr,enmy,result){
     let p = pHp/player.HP*100;
     let e = eHp/enemy[enemyCode].HP*100;
-    cnsl.querySelector('.dungeon').getElementsByTagName('p')[2].innerHTML = 'Enemy ' + enmy + " and player " + plyr + ". " + result;
+    
+    if (p < 0){p = 0;}
+    if (e < 0){e = 0;}
+    
+    cnsl.getElementsByTagName('p')[0].innerHTML = 'Enemy ' + enmy + " and player " + plyr + ". " + result;
     pbar.style.width = p.toString() + '%';
     ebar.style.width = e.toString() + '%';
     setTimeout(function(){}, 500);
-    console.log(p);
-    console.log(e);
+    if (p==0){
+        cnsl.getElementsByTagName('p')[0].innerHTML = 'You fainted and you run to your hause because you hurt badly';
+        escape();
+        pbar.style.width = '100%';
+    }
+    if (e==0){
+        cnsl.getElementsByTagName('p')[0].innerHTML = 'The monster defeated. You gained ' + enemy[enemyCode].gold + 'G';
+        game.querySelector('.enemy').style.display = 'none';
+        escapeBtn.style.display = 'block';
+        exploreBtn.style.display = 'block';
+        cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'none';
+        cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'none';
+        ebar.style.width = '100%';
+    }
 }
 
 cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.attacking').addEventListener('click',function(){
