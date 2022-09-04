@@ -11,6 +11,7 @@ body{
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
 }
 
 header{
@@ -259,6 +260,7 @@ header{
     transition: 0.5s;
 }
 #console .dungeon .healthBar p{
+    box-sizing: border-box;
     display: block;
     max-width: 20%;
     margin: 0.5%;
@@ -407,36 +409,33 @@ header{
         min-height: 4vw;
         font-size: 1.2vw;
     }
+    #body{
+        display: grid;
+        grid-template-columns: 33.3% 33.3% 33.3%;
+        grid-template-rows: 50% 50%;
+        height: 95vh;
+    }
     #left{
-        min-width: 26%;
-        height: 100%;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column: 1;
         order: 1;
         display: block;
     }
     #right{
-        min-width: 26%;
-        height: 100%;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column: 3;
         order: 3;
         display: block;
     }
     /* left setings */
-    #body{
-        flex-direction: row;
-        justify-content: center;
-    }
-    #body .wrap{
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        min-width: 46%;
-        max-width: 46%;
-        height: 100%;
-        overflow: hidden;
-        order: 2;
-    }
-    #body .wrap .game{
-        min-width: 100%;
-        min-height: 30vw;
+    
+    #body .game{
+        grid-column: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        min-height: 0vw;
     }
     #body .game .display{
         height: 30vw;
@@ -465,6 +464,18 @@ header{
         flex-direction: column;
         justify-content: space-between;
     }
+    #body .game .enemy .enemyHP{
+        border: 0.4vw solid white;
+        width: 40%;
+        height: 1vw;
+    }
+    #body .game .enemy .enemyHP .bar{
+        width: 100%;
+        height: 100.5%;
+    }
+    #body .game .enemy{
+        top: 10vh;
+    }
     /* body setings */
     #body .game .btnWraperL .btn, #body .game .btnWraperR .btn{
         width: 5vw;
@@ -478,18 +489,20 @@ header{
     /* console setings */
     #console{
         display: block;
-        width: 100%;
-        height: 100%;
+        grid-column: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        order: 3;
     }
     #console p{
         font-size: 1.8vw;
         padding: 2vw;
     }
     #console .home{
-        min-height: 23.5vw;
+        height: 20vw;
     }
     #console .dungeon{
-        min-height: 23.5vw;
+        height: 23.5vw;
     }
     #console .home button{
         font-size: 1.5vw;
@@ -507,24 +520,49 @@ header{
         background-color: black;
         box-sizing: border-box;
         border: 0.3vw solid white;
-        width: 15vw;
+        width: 12vw;
         height: 5vw;
         border-radius: 1.8vw;
         transition: 0.1s;
     }
     #console .dungeon .explore , #console .dungeon .attack{
         top: 8vw;
-        left: 6vw;
+        left: 3vw;
     }
     #console .dungeon .escape , #console .dungeon .run{
         top: 8vw;
-        right: 6vw;
+        right: 3vw;
     }
     #console button{
         border: 0.3vw solid white;
         font-size: 1.5vw;
         width: 10vw;
         height: 4vw;
+    }
+    #console .dungeon .healthBar{
+        height: 6vw;
+    }
+    #console .dungeon .healthBar p{
+        font-size: 1.8vw;
+        width: 20%;
+    }
+    #console .dungeon .healthBar .playerHP{
+        border: 0.3vw solid white;
+        height: 1vw;
+        width: 60%;
+    }
+    #console .dungeon .RPS{
+        height: 14vw;
+    }
+    #console .dungeon .RPS div{
+        width: 8vw;
+        height: 8vw;
+        font-size: 1.8vw;
+    }
+    #console .dungeon .RPS .box{
+        width: 8vw;
+        height: 8vw;
+        border: 0.3vw solid white;
     }
     /* left setingss */
     #left .equipment{

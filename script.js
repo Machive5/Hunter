@@ -564,8 +564,8 @@ function escape() {
     escapeBtn.parentElement.style.display = 'none';
     game.querySelector('.enemy').style.display = 'none';
     document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
-        shp.style.display = 'flex';
-        shp.parentElement.style.display = 'block';
+        shp.style.display = 'block';
+        shp.parentElement.style.display = 'flex';
     });
 }
 escapeBtn.addEventListener('click', escape);
