@@ -13,6 +13,23 @@ const exploreBtn = document.querySelector('.explore');
 const atkBtn = document.querySelector('.attack');
 const runBtn = document.querySelector('.run');
 const game = document.querySelector('.game');
+const pbar = cnsl.querySelector('.dungeon').querySelector('.healthBar').querySelector('.playerHP').querySelector('.bar');
+const ebar = game.querySelector('.enemy').querySelector('.enemyHP').querySelector('.bar');
+
+//----------------------------------player data-------------------------------
+const player = {
+    name: "player",
+    atk: 100,
+    def: 10,
+    HP: 500,
+    gold: 0,
+    inventory: [],
+    weapon: "Primary Weapon",
+    head: "none",
+    body: "none",
+    gloves: "none",
+    boots: "none"
+};
 
 //----------------------------------item data-------------------------------
 const obj = [
@@ -32,24 +49,27 @@ const obj = [
         "cls": "ironSword",
         "imgPth": "images/icon/ironSword.png",
         "type": "sword",
+        "buyPrice":1000,
         "sellPrice": 10
     },
     {
         "name": "Iron Helmet",
-        "desc": "Iron helmet to protecting your head. Increasing your defense by 10 points.",
+        "desc": "Iron helmet to protect your head. Increasing your defense by 10 points.",
         "def": 10,
         "cls": "ironHelmet",
         "imgPth": "images/icon/ironHelmet.png",
         "type": "helmet",
+        "buyPrice": 500,
         "sellPrice": 10
     },
     {
         "name": "Iron Chestplate",
-        "desc": "Iron Chestplate to protecting your body. Increasing your defense by 50 points.",
+        "desc": "Iron Chestplate to protect your body. Increasing your defense by 50 points.",
         "def": 50,
         "cls": "ironChestplate",
         "imgPth": "images/icon/ironChestplate.png",
         "type": "chestplate",
+        "buyPrice": 1000,
         "sellPrice": 20
     },
     {
@@ -59,6 +79,7 @@ const obj = [
         "cls": "ironGloves",
         "imgPth": "images/icon/ironGlove.png",
         "type": "gloves",
+        "buyPrice": 300,
         "sellPrice": 5
     },
     {
@@ -68,15 +89,17 @@ const obj = [
         "cls": "ironBoots",
         "imgPth": "images/icon/ironBoots.png",
         "type": "boots",
+        "buyPrice":200,
         "sellPrice": 5
     },
     {
         "name": "Healing Potion",
         "desc": "This potion can heals your HP by 100 points",
-        "hpPlus": 100,
+        "hpPlus": 0.2*player.HP,
         "cls": "healtPotion",
         "imgPth": "images/icon/healPotion.png",
         "type": "heal",
+        "buyPrice":10,
         "sellPrice": 5
     },
     {
@@ -85,25 +108,12 @@ const obj = [
         "cls": "escapePotion",
         "imgPth": "images/icon/escapePotion.png",
         "type": "escape",
+        "buyPrice":10,
         "sellPrice": 5
     }
 ];
 
-//----------------------------------player data-------------------------------
-const player = {
-    name: "player",
-    atk: 100,
-    def: 10,
-    HP: 500,
-    gold: 0,
-    inventory: [],
-    weapon: "Primary Weapon",
-    head: "none",
-    body: "none",
-    gloves: "none",
-    boots: "none"
-};
-
+//------------------------------------enemy data------------------------------
 const enemy = [
     {
         //percentage system is actualy choosing a random number between 1-10 
@@ -155,6 +165,10 @@ const enemy = [
         'spelling': 9
     }
 ]
+
+let pHp = player.HP;
+let eHp;
+
 //----------------------------------------decreasing element---------------------------------------
 function decreaseElement(itm,elm,amount)
 {
@@ -196,6 +210,7 @@ function use(itm,elm)
         unequip(helmet);
         helmet.setAttribute('src',itm.imgPth);
         player.head = itm.imgPth;
+        player.def += itm.def;
         decreaseElement(itm,elm,1);
     }
     if (itm.type === "chestplate")
@@ -203,6 +218,7 @@ function use(itm,elm)
         unequip(chestplate);
         chestplate.setAttribute('src',itm.imgPth);
         player.body = itm.imgPth;
+        player.def += itm.def;
         decreaseElement(itm,elm,1);
     }
     if (itm.type === "gloves")
@@ -210,6 +226,7 @@ function use(itm,elm)
         unequip(gloves);
         gloves.setAttribute('src',itm.imgPth);
         player.gloves = itm.imgPth;
+        player.def += itm.def;
         decreaseElement(itm,elm,1);
     }
     if (itm.type === "boots")
@@ -217,6 +234,7 @@ function use(itm,elm)
         unequip(boots);
         boots.setAttribute('src',itm.imgPth);
         player.boots = itm.imgPth;
+        player.def += itm.def;
         decreaseElement(itm,elm,1);
     }
     if (itm.type === "sword")
@@ -224,16 +242,22 @@ function use(itm,elm)
         unequip(weapon);
         weapon.setAttribute('src',itm.imgPth);
         player.weapon = itm.imgPth;
+        player.atk += itm.atk;
         decreaseElement(itm,elm,1);
     }
     if (itm.type === "heal")
     {
-        console.log("healing");
+        pHp += itm.hpPlus
+        if(pHp > player.HP)
+        {
+            pHp= player.HP;
+        }
+        pbar.style.width =
         decreaseElement(itm,elm,1);
     }
     if (itm.type === "escape")
     {
-        console.log("escaping");
+        escape();
         decreaseElement(itm,elm,1);
     }
 }
@@ -488,10 +512,10 @@ shblock.forEach(function(a){
     {
         //------------------------shopping system-----------------------
         let amount;
+        
         while(true)
         {
             amount = prompt("how much you wanna buy?");
-            console.log(amount);
             
             if(amount == null)
             {
@@ -514,7 +538,22 @@ shblock.forEach(function(a){
         }
 
         let item = a.getElementsByTagName('h3')[0].innerHTML;
-        addItems(item,amount);
+        let objek = obj.find(function(itm){
+            if (itm.name === item)
+            {
+                return itm;
+            }
+        });
+        if (amount*objek.buyPrice <= player.gold)
+        {
+            player.gold -= amount*objek.buyPrice;
+            addItems(item,amount);
+            alert("transaction success");
+        }
+        else{
+            window.alert("you don't have enough gold");
+        }
+        
     });
 });
 
@@ -524,7 +563,7 @@ equipment.forEach(function(elm) {
     elm.addEventListener('click',function() {
         if (elm.getAttribute("src") != "images/icon/none.png")
         {
-            if(confirm("Unonequip this item?"))
+            if(confirm("Unequip this item?"))
             {
                 unequip(elm);
             }
@@ -534,9 +573,11 @@ equipment.forEach(function(elm) {
 
 // ------------------------------- dungeon system -------------------------------
 
+let loot;
 
 //to dungeon
 toDungeonbtn.addEventListener('click', function(){
+    loot = 0;
     pHp = player.HP;
     pbar.style.width = '100%';
     cnsl.getElementsByTagName('p')[0].innerHTML = "you entering the dungeon";
@@ -559,14 +600,54 @@ toDungeonbtn.addEventListener('click', function(){
 
 //escape option
 function escape() {
-    game.querySelector('.display').setAttribute('src', 'images/background/house.jpg');
-    toDungeonbtn.parentElement.style.display = 'flex';
-    escapeBtn.parentElement.style.display = 'none';
-    game.querySelector('.enemy').style.display = 'none';
-    document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
-        shp.style.display = 'block';
-        shp.parentElement.style.display = 'flex';
+    let itm = player.inventory.findIndex(function(a){
+        if (a[0] === "Escape Potion")
+        {
+            return a;
+        }
     });
+    if (pHp <= 0){
+        game.querySelector('.display').setAttribute('src', 'images/background/house.jpg');
+        toDungeonbtn.parentElement.style.display = 'flex';
+        escapeBtn.parentElement.style.display = 'none';
+        game.querySelector('.enemy').style.display = 'none';
+        document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
+            shp.style.display = 'block';
+            shp.parentElement.style.display = 'flex';
+        });
+    }
+    else if (itm >= 0)
+    {
+        player.gold += loot;
+        decreaseElement(obj[7],right.querySelector('.inventory').querySelectorAll('block')[itm],1);
+        game.querySelector('.display').setAttribute('src', 'images/background/house.jpg');
+        toDungeonbtn.parentElement.style.display = 'flex';
+        escapeBtn.parentElement.style.display = 'none';
+        game.querySelector('.enemy').style.display = 'none';
+        document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
+            shp.style.display = 'block';
+            shp.parentElement.style.display = 'flex';
+        });
+    }
+    else{
+        if(player.gold+loot > 100){
+            if(confirm("you dont have any escape potion. Do you want to spend 100G to exit this dungeon?")){
+                player.gold += loot - 100;
+                game.querySelector('.display').setAttribute('src', 'images/background/house.jpg');
+                toDungeonbtn.parentElement.style.display = 'flex';
+                escapeBtn.parentElement.style.display = 'none';
+                game.querySelector('.enemy').style.display = 'none';
+                document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
+                    shp.style.display = 'block';
+                    shp.parentElement.style.display = 'flex';
+                });
+            }
+        }
+        else{
+            alert("You can't exit this dungeon because you don't have any escape potion and enough gold to exit");
+        }
+    }
+    
 }
 escapeBtn.addEventListener('click', escape);
 
@@ -610,11 +691,6 @@ runBtn.addEventListener('click', function(){
         cnsl.getElementsByTagName('p')[0].innerHTML = 'the enemy wont let you escape';
     }
 });
-
-const pbar = cnsl.querySelector('.dungeon').querySelector('.healthBar').querySelector('.playerHP').querySelector('.bar');
-const ebar = game.querySelector('.enemy').querySelector('.enemyHP').querySelector('.bar');
-let pHp = player.HP;
-let eHp
 //atk option
 atkBtn.addEventListener('click',function(){
     eHp = enemy[enemyCode].HP;
@@ -625,6 +701,8 @@ atkBtn.addEventListener('click',function(){
     cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'flex';
 });
 //battle mechanic
+
+
 function enemyMoveMechanics(){
     let rand = Math.floor(Math.random()*9);
     if (rand <= enemy[enemyCode].attacking)
@@ -643,6 +721,11 @@ function enemyMoveMechanics(){
 
 function judging(enmy,plyr){
     let rslt;
+    let eDmg = enemy[enemyCode].atk - player.def;
+    let pDmg = player.atk - enemy[enemyCode].def;
+    if(pDmg < 0){pDmg = 0}
+    if(eDmg < 0){eDmg = 0}
+    
     if (enmy == plyr)
     {
         rslt = "draw";
@@ -650,32 +733,32 @@ function judging(enmy,plyr){
     else if (enmy == "attacking" && plyr == "defending")
     {
         rslt = "player win";
-        eHp = eHp - player.atk + enemy[enemyCode].def;
+        eHp = eHp - pDmg;
     }
     else if (enmy == "defending" && plyr == "spelling")
     {
         rslt ="player win";
-        eHp = eHp - player.atk + enemy[enemyCode].def;
+        eHp = eHp - pDmg;
     }
     else if (enmy == "spelling" && plyr == "attacking")
     {
         rslt ="player win";
-        eHp = eHp - player.atk + enemy[enemyCode].def;
+        eHp = eHp - pDmg;
     }
     else if (plyr == "attacking" && enmy == "defending")
     {
         rslt ="enemy win";
-        pHp = pHp - enemy[enemyCode].atk + player.def;
+        pHp = pHp - eDmg;
     }
     else if (plyr == "defending" && enmy == "spelling")
     {
         rslt ="enemy win";
-        pHp = pHp - enemy[enemyCode].atk + player.def;
+        pHp = pHp - eDmg;
     }
     else if (plyr == "spelling" && enmy == "attacking")
     {
         rslt ="enemy win";
-        pHp = pHp - enemy[enemyCode].atk + player.def;
+        pHp = pHp - eDmg;
     }
     result(plyr,enmy,rslt)
 }
@@ -689,14 +772,18 @@ function result(plyr,enmy,result){
     cnsl.getElementsByTagName('p')[0].innerHTML = 'Enemy ' + enmy + " and player " + plyr + ". " + result;
     pbar.style.width = p.toString() + '%';
     ebar.style.width = e.toString() + '%';
-    setTimeout(function(){}, 500);
+    
     if (p==0){
         cnsl.getElementsByTagName('p')[0].innerHTML = 'You fainted and you run to your hause because you hurt badly';
         escape();
         pHp = player.HP;
         pbar.style.width = '100%';
+        ebar.style.width = '100%';
+        player.gold += Math.floor(9/10*loot);
+        console.log(player.gold);
     }
     if (e==0){
+        loot = loot + enemy[enemyCode].gold;
         cnsl.getElementsByTagName('p')[0].innerHTML = 'The monster defeated. You gained ' + enemy[enemyCode].gold + 'G';
         game.querySelector('.enemy').style.display = 'none';
         escapeBtn.style.display = 'block';
@@ -716,6 +803,3 @@ cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.defending')
 cnsl.querySelector('.dungeon').querySelector('.RPS').querySelector('.spelling').addEventListener('click',function(){
     judging(enemyMoveMechanics(),"spelling");
 });
-
-
-
