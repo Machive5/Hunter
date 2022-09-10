@@ -252,13 +252,18 @@ function use(itm,elm)
         {
             pHp= player.HP;
         }
-        pbar.style.width =
+        pbar.style.width = (pHp/player.HP*100).toString() + '%';
         decreaseElement(itm,elm,1);
     }
     if (itm.type === "escape")
     {
-        escape();
-        decreaseElement(itm,elm,1);
+        if (game.querySelector('.display').getAttribute("src") != "images/background/house.jpg")
+        {
+            escape();
+        }
+        else{
+            alert("can't use this item at home");
+        }
     }
 }
 
@@ -443,6 +448,7 @@ menu.addEventListener('click',function(a){
         left.style.display = 'none';
         right.querySelector('.shop').style.display = 'flex';
         right.querySelector('.inventory').style.display = 'none';
+        right.querySelector('.shop').getElementsByTagName('span')[0].innerHTML = player.gold.toString() + "G";
     }
     else if(a.target.classList[0] === 'inventory'){
         clear();
@@ -549,6 +555,7 @@ shblock.forEach(function(a){
             player.gold -= amount*objek.buyPrice;
             addItems(item,amount);
             alert("transaction success");
+            right.querySelector('.shop').getElementsByTagName('span')[0].innerHTML = player.gold.toString() + "G";
         }
         else{
             window.alert("you don't have enough gold");
@@ -619,7 +626,7 @@ function escape() {
     else if (itm >= 0)
     {
         player.gold += loot;
-        decreaseElement(obj[7],right.querySelector('.inventory').querySelectorAll('block')[itm],1);
+        decreaseElement(obj[7],right.querySelector('.inventory').querySelectorAll('.block')[itm],1);
         game.querySelector('.display').setAttribute('src', 'images/background/house.jpg');
         toDungeonbtn.parentElement.style.display = 'flex';
         escapeBtn.parentElement.style.display = 'none';
