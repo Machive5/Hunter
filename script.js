@@ -200,50 +200,55 @@ function decreaseElement(itm,elm,amount)
 
 function use(itm,elm)
 {
-    const helmet = left.querySelector('.equipment').querySelector('.head');
-    const chestplate = left.querySelector('.equipment').querySelector('.body');
-    const gloves = left.querySelector('.equipment').querySelector('.gloves');
-    const boots = left.querySelector('.equipment').querySelector('.boots');
-    const weapon = left.querySelector('.equipment').querySelector('.weapon');
+    const helmet = left.querySelector('.equipment').querySelector('.head').getElementsByTagName('img')[0];
+    const chestplate = left.querySelector('.equipment').querySelector('.body').getElementsByTagName('img')[0];
+    const gloves = left.querySelector('.equipment').querySelector('.gloves').getElementsByTagName('img')[0];
+    const boots = left.querySelector('.equipment').querySelector('.boots').getElementsByTagName('img')[0];
+    const weapon = left.querySelector('.equipment').querySelector('.weapon').getElementsByTagName('img')[0];
     if (itm.type === "helmet")
     {
         unequip(helmet);
         helmet.setAttribute('src',itm.imgPth);
-        player.head = itm.imgPth;
+        player.head = itm.name;
         player.def += itm.def;
         decreaseElement(itm,elm,1);
+        helmet.parentElement.getElementsByTagName('h2')[0].innerText = "DEF +" + itm.def.toString();
     }
     if (itm.type === "chestplate")
     {
         unequip(chestplate);
         chestplate.setAttribute('src',itm.imgPth);
-        player.body = itm.imgPth;
+        player.body = itm.name;
         player.def += itm.def;
         decreaseElement(itm,elm,1);
+        chestplate.parentElement.getElementsByTagName('h2')[0].innerText = "DEF +" + itm.def.toString();
     }
     if (itm.type === "gloves")
     {
         unequip(gloves);
         gloves.setAttribute('src',itm.imgPth);
-        player.gloves = itm.imgPth;
+        player.gloves = itm.name;
         player.def += itm.def;
         decreaseElement(itm,elm,1);
+        gloves.parentElement.getElementsByTagName('h2')[0].innerText = "DEF +" + itm.def.toString();
     }
     if (itm.type === "boots")
     {
         unequip(boots);
         boots.setAttribute('src',itm.imgPth);
-        player.boots = itm.imgPth;
+        player.boots = itm.name;
         player.def += itm.def;
         decreaseElement(itm,elm,1);
+        boots.parentElement.getElementsByTagName('h2')[0].innerText = "DEF +" + itm.def.toString();
     }
     if (itm.type === "sword")
     {
         unequip(weapon);
         weapon.setAttribute('src',itm.imgPth);
-        player.weapon = itm.imgPth;
+        player.weapon = itm.name;
         player.atk += itm.atk;
         decreaseElement(itm,elm,1);
+        weapon.parentElement.getElementsByTagName('h2')[0].innerText = "ATK +" + itm.atk.toString();
     }
     if (itm.type === "heal")
     {
@@ -274,9 +279,33 @@ function unequip(elm)
             return a;
         }
     });
-
-    if(itm != undefined)
-    {
+    
+    if (itm != undefined){
+        if (itm.type === "helmet")
+        {
+            player.head = none;
+            player.def -= itm.def;
+        }
+        if (itm.type === "chestplate")
+        {
+            player.body = none;
+            player.def -= itm.def;
+        }
+        if (itm.type === "gloves")
+        {
+            player.gloves = none;
+            player.def -= itm.def;
+        }
+        if (itm.type === "boots")
+        {
+            player.boots = none;
+            player.def -= itm.def;
+        }
+        if (itm.type === "sword")
+        {
+            player.weapon = none;
+            player.atk -= itm.atk;
+        }
         elm.setAttribute('src','images/icon/none.png');
         addItems(itm.name,1);
     }
@@ -448,7 +477,7 @@ menu.addEventListener('click',function(a){
         left.style.display = 'none';
         right.querySelector('.shop').style.display = 'flex';
         right.querySelector('.inventory').style.display = 'none';
-        right.querySelector('.shop').getElementsByTagName('span')[0].innerHTML = player.gold.toString() + "G";
+        right.querySelector('.shop').getElementsByTagName('span')[0].innerHTML = '<img src="images/icon/shop.png" alt=""/>'+player.gold.toString() + "G";
     }
     else if(a.target.classList[0] === 'inventory'){
         clear();
@@ -502,6 +531,7 @@ btnRight.addEventListener('click',function(a){
         a.target.parentElement.style.backgroundColor = "white";
         right.querySelector('.shop').style.display = 'flex';
         right.querySelector('.inventory').style.display = 'none';
+        right.querySelector('.shop').getElementsByTagName('span')[0].innerHTML = '<img src="images/icon/shop.png" alt=""/>'+player.gold.toString() + "G";
     }
     if(a.target.classList[0] === 'inventory'){
         clear();
@@ -555,7 +585,7 @@ shblock.forEach(function(a){
             player.gold -= amount*objek.buyPrice;
             addItems(item,amount);
             alert("transaction success");
-            right.querySelector('.shop').getElementsByTagName('span')[0].innerHTML = player.gold.toString() + "G";
+            right.querySelector('.shop').getElementsByTagName('span')[0].innerHTML = '<img src="images/icon/shop.png" alt=""/>'+player.gold.toString() + "G";
         }
         else{
             window.alert("you don't have enough gold");
@@ -567,11 +597,17 @@ shblock.forEach(function(a){
 // ------------------adding eventlistener to equipment so you can unequip the item-------------------
 
 equipment.forEach(function(elm) {
-    elm.addEventListener('click',function() {
-        if (elm.getAttribute("src") != "images/icon/none.png")
+    elm.getElementsByTagName('img')[0].addEventListener('click',function() {
+        if (elm.getElementsByTagName("img")[0].getAttribute("src") != "images/icon/none.png")
         {
             if(confirm("Unequip this item?"))
             {
+                if (elm.getAttribute("class")=="item head" || elm.getAttribute("class")=="item body" || elm.getAttribute("class")=="item gloves" || elm.getAttribute("class")=="item boots"){
+                    elm.getElementsByTagName("h2")[0].innerText = "DEF +0";
+                }
+                if (elm.getAttribute("class")=="item weapon"){
+                    elm.getElementsByTagName("h2")[0].innerText = "ATK +0";
+                }
                 unequip(elm);
             }
         }
@@ -603,6 +639,7 @@ toDungeonbtn.addEventListener('click', function(){
     runBtn.style.display = 'none';
     cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'none';
     cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'none';
+    game.getElementsByTagName('span')[0].style.display = 'flex';
 });
 
 //escape option
@@ -618,6 +655,7 @@ function escape() {
         toDungeonbtn.parentElement.style.display = 'flex';
         escapeBtn.parentElement.style.display = 'none';
         game.querySelector('.enemy').style.display = 'none';
+        game.getElementsByTagName('span')[0].style.display = 'none';
         document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
             shp.style.display = 'block';
             shp.parentElement.style.display = 'flex';
@@ -631,6 +669,7 @@ function escape() {
         toDungeonbtn.parentElement.style.display = 'flex';
         escapeBtn.parentElement.style.display = 'none';
         game.querySelector('.enemy').style.display = 'none';
+        game.getElementsByTagName('span')[0].style.display = 'none';
         document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
             shp.style.display = 'block';
             shp.parentElement.style.display = 'flex';
@@ -644,6 +683,7 @@ function escape() {
                 toDungeonbtn.parentElement.style.display = 'flex';
                 escapeBtn.parentElement.style.display = 'none';
                 game.querySelector('.enemy').style.display = 'none';
+                game.getElementsByTagName('span')[0].style.display = 'none';
                 document.querySelector('.game').querySelectorAll('.shop').forEach(function(shp){
                     shp.style.display = 'block';
                     shp.parentElement.style.display = 'flex';
@@ -798,6 +838,7 @@ function result(plyr,enmy,result){
         cnsl.querySelector('.dungeon').querySelector('.healthBar').style.display = 'none';
         cnsl.querySelector('.dungeon').querySelector('.RPS').style.display = 'none';
         ebar.style.width = '100%';
+        game.getElementsByTagName('span')[0].innerHTML = '<img src="images/icon/shop.png" alt=""/>'+loot.toString() + "G";
     }
 }
 
