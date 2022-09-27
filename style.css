@@ -486,6 +486,16 @@ header{
         grid-row-end: 2;
         min-height: 0vw;
     }
+    #body .game span:nth-child(1){
+        width: 4vw;
+        height: 4vw;
+        font-size: 1.8vw;
+    }
+    #body .game span:nth-child(1) img{
+        width: 4vw;
+        height: 4vw;
+        padding: 0.5vw;
+    }
     #body .game .display{
         height: 30vw;
     }
@@ -542,6 +552,8 @@ header{
         grid-row-start: 2;
         grid-row-end: 3;
         order: 3;
+        box-sizing: border-box;
+        border-top: 0.3vw solid rgb(43, 43, 43);
     }
     #console p{
         font-size: 1.8vw;
@@ -614,16 +626,31 @@ header{
         border: 0.3vw solid white;
     }
     /* left setingss */
+    #left{
+        box-sizing: border-box;
+        border-right: 0.3vw solid rgb(43, 43, 43);
+    }
     #left .equipment{
         display: none;
         height: 100%;
     }
-    #left .item{
+    #left .equipment h2{
+        font-size: 1.5vw;
+    }
+    #left .equipment img{
         width: 4vw;
         height: 4vw;
         border: 0.3vw solid white;
     }
-    #left .weapon{
+    #left .equipment .item{
+        width: 5vw;
+        height: 5vw;
+    }
+    #left .equipment .weapon{
+        width: 8vw;
+        height: 8vw;
+    }
+    #left .equipment .weapon img{
         width: 8vw;
         height: 8vw;
         border: 0.3vw solid white;
@@ -655,6 +682,10 @@ header{
         font-size: 1.5vw;
     }
     /* right setings */
+    #right{
+        box-sizing: border-box;
+        border-left: 0.3vw solid rgb(43, 43, 43);
+    }
     #right .shop{
         display: none;
     }
@@ -665,6 +696,18 @@ header{
         width: 4vw;
         height: 4vw;
         border: 0.3vw solid white;
+    }
+    #right .shop span:nth-child(1){
+        height: 4vw;
+        font-size: 1.8vw;
+    }
+    #right .shop span:nth-child(1) img{
+        height: 4vw;
+        width: 4vw;
+        padding: 0.5vw;
+    }
+    #right .block .desc h3{
+        font-size: 1.8vw;
     }
     #right .block .desc{
         box-sizing: border-box;
