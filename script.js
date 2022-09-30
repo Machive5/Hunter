@@ -623,6 +623,8 @@ toDungeonbtn.addEventListener('click', function(){
     loot = 0;
     pHp = player.HP;
     pbar.style.width = '100%';
+    ebar.style.width = '100%';
+    game.getElementsByTagName('span')[0].innerHTML = '<img src="images/icon/shop.png" alt=""/>0G';
     cnsl.getElementsByTagName('p')[0].innerHTML = "you entering the dungeon";
     game.querySelector('.display').setAttribute('src', 'images/background/dungeon.jpg');
     escapeBtn.parentElement.style.display = 'block'
