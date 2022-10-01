@@ -1,10 +1,15 @@
-*{
+@font-face {
+    font-family: 'pixellari';
+    src: url('fonts/pixellari/Pixellari.ttf');
+}
+* {
     padding: 0%;
     margin: 0%;
     color: white;
+    font-family: 'pixellari', cursive;
+    font-weight: normal;
 }
-
-body{
+body {
     background-color: black;
     width: 100%;
     height: 100%;
@@ -14,7 +19,7 @@ body{
     position: relative;
 }
 
-header{
+header {
     font-size: 3.5vw;
     width: 100%;
     min-height: 15vw;
@@ -24,22 +29,60 @@ header{
     box-sizing: border-box;
     border-bottom: 0.3vw solid rgb(43, 43, 43);
 }
-
-#body{
+#information {
+    box-sizing: border-box;
+    position: absolute;
+    top: 4vw;
+    width: 80%;
+    height: 80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 10%;
+    z-index: 99;
+    background-color: rgb(27, 27, 27);
+    border: 0.8vw solid grey;
+    padding: 4%;
+    padding-top: 0%;
+}
+#information h1 {
+    margin-top: 3vw;
+    font-size: 4.5vw;
+}
+#information p {
+    font-size: 3vw;
+}
+#information span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: fixed;
+    font-size: 7vw;
+    width: 7vw;
+    height: 7vw;
+    background-color: black;
+    border: 0.5vw solid white;
+    border-radius: 50%;
+    top: 11vw;
+    right: 7vw;
+    z-index: 999;
+    padding-top: 0.8vw;
+}
+#body {
     width: 100%;
     height: 91.5vh;
     display: flex;
     flex-direction: column;
 }
 
-#body .wrap{
+#body .wrap {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
 }
 
-#body .game{
+#body .game {
     position: relative;
     background-color: rgb(32, 32, 32);
     width: 100%;
@@ -49,7 +92,7 @@ header{
     align-items: center;
     justify-content: center;
 }
-#body .game span:nth-child(1){
+#body .game span:nth-child(1) {
     box-sizing: border-box;
     display: none;
     position: absolute;
@@ -61,26 +104,52 @@ header{
     height: 10vw;
     font-size: 3.5vw;
 }
-#body .game span:nth-child(1) img{
+#body .game span:nth-child(1) img {
     box-sizing: border-box;
     height: 10vw;
     width: 10vw;
     padding: 2vw;
 }
 
-#body .game .display{
+#body .game .display {
     height: 73vw;
 }
 
-#body .game .btnWraper{
+#body .game .btnWraper {
+    box-sizing: border-box;
     position: absolute;
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
     bottom: 5%;
+    padding-left: 1%;
+    padding-right: 1%;
 }
-#body .game .enemy .enemyHP{
+#body .btn {
+    width: 12vw;
+    height: 12vw;
+    margin-top: 4vw;
+    flex-direction: column;
+    transition: 0.5s;
+}
+#body .btn img {
+    box-sizing: border-box;
+    width: 12vw;
+    height: 12vw;
+    transition: 0.5s;
+    border: 1vw solid white;
+    background-color: black;
+    border-radius: 25%;
+    padding: 0.6vw;
+}
+#body .btn h2 {
+    opacity: 0;
+    transition: 0.5s;
+    font-size: 4.5vw;
+    color: white;
+}
+#body .game .enemy .enemyHP {
     overflow: hidden;
     background-color: red;
     border: 0.8vw solid white;
@@ -90,14 +159,14 @@ header{
     margin-bottom: 1vw;
     box-sizing: border-box;
 }
-#body .game .enemy .enemyHP .bar{
+#body .game .enemy .enemyHP .bar {
     background-color: lime;
     width: 100%;
     height: 100.5%;
     border-radius: 1vw;
     transition: 0.5s;
 }
-#body .game .enemy{
+#body .game .enemy {
     display: none;
     flex-direction: column;
     position: absolute;
@@ -105,58 +174,54 @@ header{
     width: 100%;
     top: 15vw;
 }
-#body .game .enemy .monster{
+#body .game .enemy .monster {
     max-width: 40%;
 }
-#body .btn{
-    width: 12vw;
-    height: 12vw;
-    background-color: black;
-    border: 0.8vw solid white;
-    border-radius: 25%;
-    transition: 0.5s;
-}
 
-#left, #console, #right{
+#left,
+#console,
+#right {
     width: 100%;
     height: 100%;
     max-height: 100%;
 }
 
-#left{
+#left {
     display: none;
     overflow: auto;
 }
-#left nav{
+#left nav {
     display: none;
     box-sizing: border-box;
     padding: 1% 10%;
     overflow: auto;
 }
-#left nav h1{
+#left nav h1 {
     font-size: 6.5vw;
     text-align: center;
 }
-#left nav h4{
+#left nav h4 {
     font-size: 4.5vw;
     margin-top: 2vw;
 }
-#left nav .about, #left nav .credit{
+#left nav .about,
+#left nav .credit {
+    text-decoration: none;
     font-size: 4.5vw;
     padding-top: 9vw;
 }
-#left nav p{
+#left nav p {
     margin-top: 2vw;
     margin-left: 5vw;
     font-size: 3.5vw;
 }
-#left nav ul{
+#left nav ul {
     margin-top: 2vw;
     margin-left: 10vw;
     font-size: 3.5vw;
 }
 
-#left .equipment{
+#left .equipment {
     position: relative;
     display: none;
     justify-content: center;
@@ -164,17 +229,17 @@ header{
     width: 100%;
     height: 80vw;
 }
-#left .equipment img{
+#left .equipment img {
     width: 12vw;
     height: 12vw;
     border: 0.8vw solid white;
     border-radius: 25%;
 }
-#left .equipment h2{
+#left .equipment h2 {
     font-size: 3.5vw;
     margin-top: 1vw;
 }
-#left .equipment .item{
+#left .equipment .item {
     width: 14vw;
     height: 14vw;
     position: absolute;
@@ -182,41 +247,41 @@ header{
     flex-direction: column;
     align-items: center;
 }
-#left .equipment .weapon{
+#left .equipment .weapon {
     width: 25vw;
     height: 26vw;
 }
-#left .equipment .weapon img{
+#left .equipment .weapon img {
     width: 25vw;
     height: 25vw;
     border: 0.8vw solid white;
     border-radius: 25%;
 }
-#left .equipment .head{
+#left .equipment .head {
     top: 13%;
     left: 13%;
 }
-#left .equipment .body{
+#left .equipment .body {
     bottom: 13%;
     left: 13%;
 }
-#left .equipment .gloves{
+#left .equipment .gloves {
     bottom: 13%;
     right: 13%;
 }
-#left .equipment .boots{
+#left .equipment .boots {
     top: 13%;
     right: 13%;
 }
 
-#console{
+#console {
     width: 100%;
     height: 100%;
     display: none;
     overflow: auto;
     flex-direction: column;
 }
-#console .home{
+#console .home {
     position: relative;
     display: flex;
     align-items: center;
@@ -224,7 +289,7 @@ header{
     width: 100%;
     height: 80vw;
 }
-#console .home button{
+#console .home button {
     font-size: 3.5vw;
     background-color: black;
     box-sizing: border-box;
@@ -234,15 +299,15 @@ header{
     border-radius: 4vw;
     transition: 0.1s;
 }
-#console .home button:active{
+#console .home button:active {
     background-color: white;
     color: black;
 }
-#console .dungeon{
+#console .dungeon {
     display: none;
     position: relative;
 }
-#console .dungeon button{
+#console .dungeon button {
     position: absolute;
     font-size: 3.5vw;
     background-color: black;
@@ -253,22 +318,25 @@ header{
     border-radius: 4vw;
     transition: 0.1s;
 }
-#console .dungeon button:active{
+#console .dungeon button:active {
     background-color: white;
     color: black;
 }
-#console .dungeon .run , #console .dungeon .attack{
+#console .dungeon .run,
+#console .dungeon .attack {
     display: none;
 }
-#console .dungeon .explore , #console .dungeon .attack{
+#console .dungeon .explore,
+#console .dungeon .attack {
     top: 25vw;
     left: 10vw;
 }
-#console .dungeon .escape , #console .dungeon .run{
+#console .dungeon .escape,
+#console .dungeon .run {
     top: 25vw;
     right: 10vw;
 }
-#console .dungeon .healthBar{
+#console .dungeon .healthBar {
     display: none;
     flex-direction: row;
     align-items: center;
@@ -277,7 +345,7 @@ header{
     height: 20vw;
     box-sizing: border-box;
 }
-#console .dungeon .healthBar .playerHP{
+#console .dungeon .healthBar .playerHP {
     width: 60%;
     height: 4vw;
     box-sizing: border-box;
@@ -285,14 +353,14 @@ header{
     background-color: red;
     border-radius: 5vw;
 }
-#console .dungeon .healthBar .playerHP .bar{
+#console .dungeon .healthBar .playerHP .bar {
     background-color: lime;
     width: 100%;
     height: 100%;
     border-radius: 1vw;
     transition: 0.5s;
 }
-#console .dungeon .healthBar p{
+#console .dungeon .healthBar p {
     box-sizing: border-box;
     display: block;
     max-width: 20%;
@@ -300,7 +368,7 @@ header{
     font-size: 3.5vw;
     text-align: center;
 }
-#console .dungeon .RPS{
+#console .dungeon .RPS {
     width: 100%;
     height: 30vw;
     box-sizing: border-box;
@@ -308,7 +376,7 @@ header{
     align-items: center;
     justify-content: space-around;
 }
-#console .dungeon .RPS div{
+#console .dungeon .RPS div {
     display: flex;
     flex-direction: column;
     font-size: 3.5vw;
@@ -317,23 +385,23 @@ header{
     width: 20vw;
     height: 20vw;
 }
-#console .dungeon .RPS .box{
+#console .dungeon .RPS .box {
     box-sizing: border-box;
     width: 20vw;
     height: 20vw;
     border: 0.8vw solid white;
     border-radius: 25%;
 }
-#console .dungeon .RPS .box:active{
+#console .dungeon .RPS .box:active {
     background-color: white;
 }
-#console p{
+#console p {
     box-sizing: border-box;
     font-size: 4.5vw;
     width: 100%;
     padding: 8%;
 }
-#console button{
+#console button {
     position: absolute;
     font-size: 3.5vw;
     background-color: black;
@@ -343,35 +411,35 @@ header{
     height: 10vw;
     border-radius: 2.5vw;
 }
-#right{
+#right {
     display: none;
     overflow: auto;
 }
-#right .shop{
+#right .shop {
     display: none;
     flex-direction: column;
     box-sizing: border-box;
 }
-#right .shop span:nth-child(1){
+#right .shop span:nth-child(1) {
     box-sizing: border-box;
     display: flex;
     position: sticky;
     top: 0%;
     align-items: center;
-    font-size: 3.5vw;
+    font-size: 3vw;
     width: 100%;
     height: 10vw;
     padding-left: 5%;
     background-color: black;
 }
-#right .shop span:nth-child(1) img{
+#right .shop span:nth-child(1) img {
     box-sizing: border-box;
     height: 10vw;
     width: 10vw;
     padding: 2vw;
 }
-#right .block{
-    font-size: 3.5vw;
+#right .block {
+    font-size: 3vw;
     box-sizing: border-box;
     padding: 5%;
     width: 100%;
@@ -379,35 +447,35 @@ header{
     flex-direction: row;
     align-items: center;
 }
-#right .block h3{
+#right .block h3 {
     font-size: 4.5vw;
 }
-#right .block img{
+#right .block img {
     width: 13vw;
     height: 13vw;
     border: 0.8vw solid white;
     border-radius: 25%;
 }
-#right .block .desc{
+#right .block .desc {
     box-sizing: border-box;
     width: 100%;
     margin-left: 10%;
     overflow: auto;
 }
 
-#right .inventory{
+#right .inventory {
     display: none;
     flex-direction: column;
     box-sizing: border-box;
 }
 
-#right .inventory .block{
+#right .inventory .block {
     display: flex;
     flex-direction: column;
     transition: 0.5s;
 }
 
-#right .inventory .block .wrp1{
+#right .inventory .block .wrp1 {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -415,7 +483,7 @@ header{
     align-items: center;
 }
 
-#right .inventory .block .wrp2{
+#right .inventory .block .wrp2 {
     position: relative;
     width: 100%;
     display: none;
@@ -424,7 +492,7 @@ header{
     align-items: center;
     margin-top: 2vw;
 }
-#right .inventory .block .wrp2 button{
+#right .inventory .block .wrp2 button {
     font-size: 4.5vw;
     width: 20vw;
     height: 10vw;
@@ -432,7 +500,7 @@ header{
     border-radius: 2vw;
     background-color: black;
 }
-#right .inventory .block .wrp2 button:nth-child(3){
+#right .inventory .block .wrp2 button:nth-child(3) {
     border: none;
     width: auto;
     height: auto;
@@ -440,38 +508,73 @@ header{
     right: 2vw;
 }
 
-
-.btn img{
+.btn img {
     width: 9vw;
 }
+#filler {
+    width: 10vw;
+    height: 10vw;
+    order: 99999999999;
+}
 
-.btn{
+.btn {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 800px) {
     /* default setings */
-    header{
+    header {
         width: 100%;
         min-height: 4vw;
         font-size: 1.2vw;
     }
-    #body{
+    #information {
+        box-sizing: border-box;
+        position: absolute;
+        top: -6vw;
+        width: 70%;
+        height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin: 15%;
+        z-index: 99;
+        background-color: rgb(27, 27, 27);
+        border: 0.4vw solid grey;
+        padding: 4%;
+        padding-top: 0%;
+    }
+    #information h1 {
+        margin-top: 3vw;
+        font-size: 1.8vw;
+    }
+    #information p {
+        font-size: 1.4vw;
+    }
+    #information span {
+        width: 3vw;
+        height: 3vw;
+        font-size: 3vw;
+        border: 0.2vw solid white;
+        top: 8vw;
+        right: 14vw;
+        padding-top: 0.3vw;
+    }
+    #body {
         display: grid;
         grid-template-columns: 33.3% 33.3% 33.3%;
         grid-template-rows: 50% 50%;
         height: 95vh;
     }
-    #left{
+    #left {
         grid-row-start: 1;
         grid-row-end: 3;
         grid-column: 1;
         order: 1;
         display: block;
     }
-    #right{
+    #right {
         grid-row-start: 1;
         grid-row-end: 3;
         grid-column: 3;
@@ -479,74 +582,97 @@ header{
         display: block;
     }
     /* left setings */
-    
-    #body .game{
+
+    #body .game {
         grid-column: 2;
         grid-row-start: 1;
         grid-row-end: 2;
         min-height: 0vw;
     }
-    #body .game span:nth-child(1){
+    #body .game span:nth-child(1) {
         width: 4vw;
         height: 4vw;
         font-size: 1.8vw;
     }
-    #body .game span:nth-child(1) img{
+    #body .game span:nth-child(1) img {
         width: 4vw;
         height: 4vw;
         padding: 0.5vw;
     }
-    #body .game .display{
+    #body .game .display {
         height: 30vw;
     }
-    
-    #body .game .btnWraper{
+
+    #body .game .btnWraper {
         display: none;
     }
-    #body .game .btnWraperR{
-        width: 5vw;
-        height: 12vw;
+    #body .game .btnWraperR {
+        width: 6vw;
+        height: 15vw;
         position: absolute;
         top: 10%;
-        right: 1%;
+        right: 3%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        box-sizing: border-box;
     }
-    #body .game .btnWraperL{
-        width: 5vw;
-        height: 12vw;
+    #body .game .btnWraperL {
+        width: 6vw;
+        height: 15vw;
         position: absolute;
         top: 10%;
-        left: 1%;
+        left: 3%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        box-sizing: border-box;
     }
-    #body .game .enemy .enemyHP{
+    #body .game .enemy .enemyHP {
         border: 0.4vw solid white;
         width: 40%;
         height: 1vw;
     }
-    #body .game .enemy .enemyHP .bar{
+    #body .game .enemy .enemyHP .bar {
         width: 100%;
         height: 100.5%;
     }
-    #body .game .enemy{
+    #body .game .enemy {
         top: 10vh;
     }
     /* body setings */
-    #body .game .btnWraperL .btn, #body .game .btnWraperR .btn{
-        width: 5vw;
-        height: 5vw;
-        border: 0.4vw solid white;
+    #body .game .btnWraperL .btn {
+        margin-left: -1vw;
     }
-    #body .game .btnWraperR .btn img, #body .game .btnWraperL .btn img{
-        width: 4vw;
-        height: 4vw;
+    #body .game .btnWraperR .btn {
+        margin-left: 2vw;
+    }
+    #body .game .btnWraperL .btn,
+    #body .game .btnWraperR .btn {
+        box-sizing: border-box;
+        margin-top: 0vw;
+        width: 5vw;
+        height: 5.5vw;
+        flex-direction: column;
+    }
+    #body .game .btnWraperL .btn h2,
+    #body .game .btnWraperR .btn h2 {
+        font-size: 1.5vw;
+        color: black;
+        display: block;
+        opacity: 0;
+        transition: 0.5s;
+    }
+    #body .game .btnWraperR .btn img,
+    #body .game .btnWraperL .btn img {
+        border: 0.3vw solid white;
+        background-color: black;
+        border-radius: 25%;
+        width: 3vw;
+        height: 3vw;
+        transition: 0.5s;
+        padding: 0.1vw;
     }
     /* console setings */
-    #console{
+    #console {
         display: block;
         grid-column: 2;
         grid-row-start: 2;
@@ -555,170 +681,173 @@ header{
         box-sizing: border-box;
         border-top: 0.3vw solid rgb(43, 43, 43);
     }
-    #console p{
-        font-size: 1.8vw;
+    #console p {
+        font-size: 1.5vw;
         padding: 2vw;
     }
-    #console .home{
+    #console .home {
         height: 20vw;
     }
-    #console .dungeon{
+    #console .dungeon {
         height: 23.5vw;
     }
-    #console .home button{
-        font-size: 1.5vw;
+    #console .home button {
+        font-size: 1vw;
         background-color: black;
         box-sizing: border-box;
         border: 0.3vw solid white;
-        width: 15vw;
-        height: 5vw;
-        border-radius: 1.8vw;
+        width: 11vw;
+        height: 4vw;
+        border-radius: 1vw;
         transition: 0.1s;
+        top: 6vw;
     }
-    #console .dungeon button{
+    #console .dungeon button {
         position: absolute;
-        font-size: 1.5vw;
+        font-size: 1vw;
         background-color: black;
         box-sizing: border-box;
         border: 0.3vw solid white;
-        width: 12vw;
-        height: 5vw;
-        border-radius: 1.8vw;
+        width: 11vw;
+        height: 4vw;
+        border-radius: 1vw;
         transition: 0.1s;
     }
-    #console .dungeon .explore , #console .dungeon .attack{
-        top: 8vw;
+    #console .dungeon .explore,
+    #console .dungeon .attack {
+        top: 6vw;
         left: 3vw;
     }
-    #console .dungeon .escape , #console .dungeon .run{
-        top: 8vw;
+    #console .dungeon .escape,
+    #console .dungeon .run {
+        top: 6vw;
         right: 3vw;
     }
-    #console button{
+    #console button {
         border: 0.3vw solid white;
         font-size: 1.5vw;
-        width: 10vw;
-        height: 4vw;
+        width: 9vw;
+        height: 3vw;
     }
-    #console .dungeon .healthBar{
+    #console .dungeon .healthBar {
         height: 6vw;
     }
-    #console .dungeon .healthBar p{
-        font-size: 1.8vw;
+    #console .dungeon .healthBar p {
+        font-size: 1.5vw;
         width: 20%;
     }
-    #console .dungeon .healthBar .playerHP{
+    #console .dungeon .healthBar .playerHP {
         border: 0.3vw solid white;
         height: 1vw;
         width: 60%;
     }
-    #console .dungeon .RPS{
+    #console .dungeon .RPS {
         height: 14vw;
     }
-    #console .dungeon .RPS div{
+    #console .dungeon .RPS div {
         width: 8vw;
         height: 8vw;
-        font-size: 1.8vw;
+        font-size: 1.5vw;
     }
-    #console .dungeon .RPS .box{
+    #console .dungeon .RPS .box {
         width: 8vw;
         height: 8vw;
         border: 0.3vw solid white;
     }
     /* left setingss */
-    #left{
+    #left {
         box-sizing: border-box;
         border-right: 0.3vw solid rgb(43, 43, 43);
     }
-    #left .equipment{
+    #left .equipment {
         display: none;
         height: 100%;
     }
-    #left .equipment h2{
-        font-size: 1.5vw;
+    #left .equipment h2 {
+        font-size: 1vw;
     }
-    #left .equipment img{
+    #left .equipment img {
         width: 4vw;
         height: 4vw;
         border: 0.3vw solid white;
     }
-    #left .equipment .item{
-        width: 5vw;
-        height: 5vw;
+    #left .equipment .item {
+        width: 6vw;
+        height: 6vw;
     }
-    #left .equipment .weapon{
+    #left .equipment .weapon {
         width: 8vw;
         height: 8vw;
     }
-    #left .equipment .weapon img{
+    #left .equipment .weapon img {
         width: 8vw;
         height: 8vw;
         border: 0.3vw solid white;
     }
 
-    #left nav{
+    #left nav {
         display: none;
     }
-    #left nav h4{
+    #left nav h4 {
         font-size: 1.5vw;
         margin-top: 2vw;
     }
-    #left nav .about{
+    #left nav .about {
         font-size: 2vw;
         padding-top: 0vw;
     }
-    #left nav .credit{
+    #left nav .credit {
         font-size: 2vw;
         padding-top: 5vw;
     }
-    #left nav p{
-        margin-top: 2vw;
+    #left nav p {
+        margin-top: 1vw;
         margin-left: 1.5vw;
-        font-size: 1.5vw;
+        font-size: 1.2vw;
     }
-    #left nav ul{
-        margin-top: 2vw;
+    #left nav ul {
+        margin-top: 1vw;
         margin-left: 3vw;
-        font-size: 1.5vw;
+        font-size: 1vw;
     }
     /* right setings */
-    #right{
+    #right {
         box-sizing: border-box;
         border-left: 0.3vw solid rgb(43, 43, 43);
     }
-    #right .shop{
+    #right .shop {
         display: none;
     }
-    #right .inventory{
+    #right .inventory {
         display: none;
     }
-    #right .block img{
+    #right .block img {
         width: 4vw;
         height: 4vw;
         border: 0.3vw solid white;
     }
-    #right .shop span:nth-child(1){
+    #right .shop span:nth-child(1) {
         height: 4vw;
         font-size: 1.8vw;
     }
-    #right .shop span:nth-child(1) img{
+    #right .shop span:nth-child(1) img {
         height: 4vw;
         width: 4vw;
         padding: 0.5vw;
     }
-    #right .block .desc h3{
+    #right .block .desc h3 {
         font-size: 1.8vw;
     }
-    #right .block .desc{
+    #right .block .desc {
         box-sizing: border-box;
         width: 100%;
         margin-left: 10%;
-        font-size: 1.5vw;
+        font-size: 1vw;
     }
-    #right .block span{
-        font-size: 1.5vw;
+    #right .block span {
+        font-size: 1vw;
     }
-    #right .inventory .block .wrp2 button{
+    #right .inventory .block .wrp2 button {
         font-size: 1.5vw;
         width: 7vw;
         height: 3vw;
@@ -726,16 +855,19 @@ header{
         border-radius: 2vw;
         background-color: black;
     }
-    #right .inventory .block .wrp1{
-        width: 100%
+    #right .inventory .block .wrp1 {
+        width: 100%;
     }
-    #right .inventory .block .wrp2 button:nth-child(3){
+    #right .inventory .block .wrp2 button:nth-child(3) {
         border: none;
         width: 2vw;
         height: 2vw;
         position: absolute;
         right: 0%;
     }
-
-
+    #filler {
+        width: 4vw;
+        height: 4vw;
+        order: 99999999999;
+    }
 }

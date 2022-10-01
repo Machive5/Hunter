@@ -12,13 +12,46 @@
         <header>
             <h1>HUNTER</h1>
         </header>
-
+        <div id="information">
+            <span>×</span>
+            <h1> Hi, Welcome to Hunter</h1>
+            <p>Before you playing, there is some information that you should know.</p>
+            <h1>How to Play</h1>
+            <p>Hunter is actualy a rock paper scissor game but with deferent name.
+                There is attack with the logo of sword, defense with the logo of shield, and spell with the logo of magical circle.
+                attack will won againts spell but lose againts defense, spell will won againts defense but lose againts attack, and defense will won againts attack but lose againts spell.
+            </p>
+            <h1>Panels</h1>
+            <p>
+                There is 6 panels in this game. Navigation pane contains "about" and "credit", Equipment pane contains item that you wear, shop pane contains items that you can buy, inventory pane contains items that you have, console pane contains execution buttons in game, game pane contains the visualization of the game.
+                you can check all these panels with clicking the pane icon, on default, console and game panels will already displayed at start.
+            </p>
+            <h1>Battle</h1>
+            <p>You need gold in this game and to get the gold in this game you should hunting in the dungeon. click "go to dungeon" button to enter the dungeon and find the enemies with clicking "explore more" button.
+                if you found monsters defeat them and you will get some gold. You need escape potion, 100 gold, or die to escape from the dungeon. You can use escape potion on your inventory pane or clicking escape button to escape.
+            </p>
+            <h1>Buy and Sell</h1>
+            <p>In the shop panel you can buy items to upgrade your stats. Just click on the item that you want to buy and follow the instruction. The items you buy will added on your inventory automatically.
+                If you wanna sell some items, Just go to inventory panel and click on the item that you want to sell and click "sell" button.
+            </p>
+            <h1>Equip and Unequip</h1>
+            <p>After buying some items in shop you can equip the equipment items. Just click equipment items that you want to equip in the inventory pane and click "use" button.
+                To unequip, go to the equipment panel then click the item that you want to unequip and follow the instruction.
+            </p>
+            <p>that's all of the information. Enjoy the game...</p>
+        </div>
         <div id="body">
             <div class="game">
                 <span><img src="images/icon/shop.png" alt=""/>0G</span>
                 <div class="btnWraperL">
-                    <button class="btn"><img src="images/icon/navigation.png" alt="" class="nav"></button>
-                    <button class="btn"><img src="images/icon/armour.png" alt="" class="equipment"></button>
+                    <div class="btn">
+                        <img src="images/icon/navigation.png" alt="" class="nav">
+                        <h2>navigation</h2>
+                    </div>
+                    <div class="btn">
+                        <img src="images/icon/armour.png" alt="" class="equipment">
+                        <h2>equipment</h2>
+                    </div>
                 </div>
                 <div class="enemy">
                     <div class="enemyHP">
@@ -28,15 +61,36 @@
                 </div>
                 <img src="images/background/house.jpg" alt="" class="display">
                 <div class="btnWraper">    
-                    <button class="btn"><img src="images/icon/navigation.png" alt="" class="nav"></button>
-                    <button class="btn"><img src="images/icon/armour.png" alt="" class="equipment"></button>
-                    <button class="btn"><img src="images/icon/console.png" alt="" class="console"></button>
-                    <button class="btn"><img src="images/icon/shop.png" alt="" class="shop"></button>
-                    <button class="btn"><img src="images/icon/inventory.png" alt="" class="inventory"></button>
+                    <div class="btn">
+                        <img src="images/icon/navigation.png" alt="" class="nav">
+                        <h2>navigation</h2>
+                    </div>
+                    <div class="btn">
+                        <img src="images/icon/armour.png" alt="" class="equipment">
+                        <h2>equipment</h2>
+                    </div>
+                    <div class="btn">
+                        <img src="images/icon/console.png" alt="" class="console">
+                        <h2>console</h2>
+                    </div>
+                    <div class="btn">
+                        <img src="images/icon/shop.png" alt="" class="shop">
+                        <h2>shop</h2>
+                    </div>
+                    <div class="btn">
+                        <img src="images/icon/inventory.png" alt="" class="inventory">
+                        <h2>inventory</h2>
+                    </div>
                 </div>
                 <div class="btnWraperR">
-                    <button class="btn"><img src="images/icon/shop.png" alt="" class="shop"></button>
-                    <button class="btn"><img src="images/icon/inventory.png" alt="" class="inventory"></button>
+                    <div class="btn">
+                        <img src="images/icon/shop.png" alt="" class="shop">
+                        <h2>shop</h2>
+                    </div>
+                    <div class="btn">
+                        <img src="images/icon/inventory.png" alt="" class="inventory">
+                        <h2>inventory</h2>
+                    </div>
                 </div>
             </div>
 
@@ -78,7 +132,7 @@
                 <nav>
                     <div class="about">
                         <h3>About</h3>
-                        <p>Hunter. A simple, easy, and short RPG game. There's no objective in this game. All you need to do is hunt the dungeon and buy more good equipment. There is a boss in the dungeon you can make that your objective if you want.
+                        <p>Hunter. A simple, easy, and short RPG game. There's no objective in this game. All you need to do is hunt the dungeon and buy more good equipment. There is a boss in the dungeon.
                             The dungeon is a multi dimensional dungeon that can change its room automaticaly so you need some potion, die or deffeating the boss to escape the dungeon. This game probably can't save your progress so make sure to not close this tab or reload it until you finish this game.
                         </p>
                     </div>
@@ -102,12 +156,13 @@
                             <li><a href='https://www.freepik.com/vectors/dungeon'>Dungeon vector by upklyak</a></li>
                         </ul>
                     </div>
+                    <div id="filler"></div>
                 </nav>
         
                 <div class="equipment">
                     <div class="item weapon">
                         <img src="images/icon/primarySword.png" alt="">
-                        <h2>ATK +0</h2>
+                        <h2>ATK +20</h2>
                     </div>
                     <div class="item head">
                         <img src="images/icon/none.png" alt="">
@@ -187,9 +242,10 @@
                         </div>
                         <span>10G</span>
                     </div>
+                    <div id="filler"></div>
                 </div>
                 <div class="inventory">
-                    
+                    <div id="filler"></div>
                 </div>
             </div>
         </div>
