@@ -22,7 +22,7 @@ const player = {
     atk: 120,
     def: 10,
     HP: 500,
-    gold: 99999,
+    gold: 0,
     inventory: [],
     weapon: 'Primary Sword',
     head: null,
@@ -829,4 +829,7 @@ cnsl.querySelector('.dungeon')
 const elm = document.getElementById('information').getElementsByTagName('span')[0];
 elm.addEventListener('click', function () {
     elm.parentElement.style.display = 'none';
+});
+left.getElementsByTagName("nav")[0].querySelector(".tutorial").getElementsByTagName('h4')[0].addEventListener('click', function(){
+    elm.parentElement.style.display = 'block';
 });
