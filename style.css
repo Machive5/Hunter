@@ -220,21 +220,22 @@ header {
     margin-left: 10vw;
     font-size: 3.5vw;
 }
-#left nav .tutorial{
+#left nav .tutorial {
     width: 100%;
-    height: 10vw;
+    height: 11vw;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 3vw;
 }
-#left nav .tutorial h4{
+#left nav .tutorial h4 {
     width: 50%;
-    height: 10vw;
+    height: 11vw;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 0.8vw solid white;
+    border-radius: 3vw;
 }
 
 #left .equipment {
@@ -825,6 +826,17 @@ header {
         margin-top: 1vw;
         margin-left: 3vw;
         font-size: 1vw;
+    }
+
+    #left nav .tutorial {
+        width: 100%;
+        height: 4vw;
+    }
+    #left nav .tutorial h4 {
+        width: 50%;
+        height: 4vw;
+        border: 0.4vw solid white;
+        border-radius: 1vw;
     }
     /* right setings */
     #right {
